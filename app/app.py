@@ -69,7 +69,7 @@ def metrics():
         output += f'service_up{{name="{r["name"]}"}} {status}\n'
         if r["response_time_ms"]:
             output += f'service_response_ms{{name="{r["name"]}"}} {r["response_time_ms"]}\n'
-    return output, 200, {"Content-Type": "text/plain"}
+    return output, 200, {"Content-Type": "text/plain; charset=utf-8"}
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5003, debug=True)
