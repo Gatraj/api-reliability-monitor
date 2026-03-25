@@ -4,9 +4,18 @@ Monitors availability and response time of HTTP services.
 Exposes Prometheus-compatible metrics endpoint for observability.
 
 ## Run with Docker
+
+**Option 1 — Docker Compose (recommended)**
+
 ```bash
 git clone https://github.com/Gatraj/api-reliability-monitor.git
 cd api-reliability-monitor
+docker-compose up --build
+```
+
+**Option 2 — Docker directly**
+
+```bash
 docker build -t api-reliability-monitor .
 docker run -p 5003:5001 api-reliability-monitor
 ```
@@ -33,14 +42,13 @@ docker run -p 5003:5001 \
   api-reliability-monitor
 ```
 
+If not set, defaults to GitHub API, JSONPlaceholder, HTTPBin Healthy, and HTTPBin Down.
 
 ## Running Tests
 
 ```bash
-
 cd app
 python3 -m pytest tests/test_app.py -v
-
 ```
 
 ## Stack
