@@ -21,6 +21,28 @@ Visit http://localhost:5003
 | `GET /health` | Kubernetes liveness probe |
 | `GET /metrics` | Prometheus scrape endpoint |
 
+## Configuration
+
+Services are configurable via the `MONITORED_SERVICES` environment variable.
+
+Format: JSON array of objects with `name` and `url` fields.
+
+```bash
+docker run -p 5003:5001 \
+  -e MONITORED_SERVICES='[{"name":"GitHub API","url":"https://api.github.com"},{"name":"HTTPBin Down","url":"https://httpbin.org/status/503"}]' \
+  api-reliability-monitor
+```
+
+
+## Running Tests
+
+```bash
+
+cd app
+python3 -m pytest tests/test_app.py -v
+
+```
+
 ## Stack
 
 - Python, Flask, Gunicorn
