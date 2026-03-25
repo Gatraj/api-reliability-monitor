@@ -2,15 +2,30 @@ from flask import Flask, render_template, jsonify
 import requests
 import time
 import datetime
+import os
+import json
+
 
 app = Flask(__name__)
 
-# Services to monitor
-SERVICES = [
-    {"name": "GitHub", "url": "https://api.github.com"},
-    {"name": "Docker Hub", "url": "https://hub.docker.com"},
-    {"name": "Google", "url": "https://www.google.com"},
+# Default services — used when MONITORED_SERVICES env var is not set
+DEFAULT_SERVICES = [
+    {"name": "GitHub API", "url": "https://api.github.com"},
+    {"name": "JSONPlaceholder", "url": "https://jsonplaceholder.typicode.com/posts/1"},
+    {"name": "HTTPBin Healthy", "url": "https://httpbin.org/status/200"},
+    {"name": "HTTPBin Down", "url": "https://httpbin.org/status/503"},
 ]
+
+def load_services():
+    raw = os.environ.get("MONITORED_SERVICES")
+    if raw:
+        try:
+            return json.loads(raw)
+        except json.JSONDecodeError:
+            print("WARNING: MONITORED_SERVICES is not valid JSON. Using defaults.")
+    return DEFAULT_SERVICES
+
+SERVICES = load_services()
 
 def check_service(service):
     try:
