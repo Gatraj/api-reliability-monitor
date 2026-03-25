@@ -1,0 +1,14 @@
+
+
+services:
+  app:
+    build: .
+    ports:
+      - "5003:5001"
+    environment:
+      - MONITORED_SERVICES=[{"name":"GitHub API","url":"https://api.github.com"},{"name":"JSONPlaceholder","url":"https://jsonplaceholder.typicode.com/posts/1"},{"name":"HTTPBin Healthy","url":"https://httpbin.org/status/200"},{"name":"HTTPBin Down","url":"https://httpbin.org/status/503"}]
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:5001/health"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
