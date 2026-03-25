@@ -3,6 +3,15 @@
 Monitors availability and response time of HTTP services.
 Exposes Prometheus-compatible metrics endpoint for observability.
 
+![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)
+![Docker](https://img.shields.io/badge/Docker-ready-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.12-blue.svg)
+
+## Dashboard
+
+![Dashboard](docs/dashboard.png)
+
+
 ## Run with Docker
 
 **Option 1 — Docker Compose (recommended)**
