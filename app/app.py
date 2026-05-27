@@ -13,7 +13,7 @@ DEFAULT_SERVICES = [
     {"name": "GitHub API", "url": "https://api.github.com"},
     {"name": "JSONPlaceholder", "url": "https://jsonplaceholder.typicode.com/posts/1"},
     {"name": "HTTPBin Healthy", "url": "https://httpbin.org/status/200"},
-    {"name": "HTTPBin Down", "url": "https://httpbin.org/status/503"},
+    {"name": "IoT Light Sensor", "url": "https://iot-light-sensor.onrender.com/"},
 ]
 
 def load_services():
