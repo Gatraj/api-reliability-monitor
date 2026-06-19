@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: api-monitor-config
+  namespace: api-reliability-monitor
+data:
+  MONITORED_SERVICES: |
+    [
+      {"name": "GitHub API", "url": "https://api.github.com"},
+      {"name": "JSONPlaceholder", "url": "https://jsonplaceholder.typicode.com/posts/1"},
+      {"name": "HTTPBin Healthy", "url": "https://httpbin.org/status/200"},
+      {"name": "IoT Light Sensor", "url": "https://iot-light-sensor.onrender.com/"}
+    ]

@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-reliability-monitor
+  namespace: api-reliability-monitor
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: api-reliability-monitor
+  template:
+    metadata:
+      labels:
+        app: api-reliability-monitor
+    spec:
+      containers:
+        - name: api-reliability-monitor
+          image: bgatraj/api-reliability-monitor:v1.0
+          ports:
+            - containerPort: 5001
+          envFrom:
+            - configMapRef:
+                name: api-monitor-config
+          resources:
+            requests:
+              memory: "64Mi"
+              cpu: "100m"
+            limits:
+              memory: "128Mi"
+              cpu: "200m"
+          livenessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 10
+            periodSeconds: 30
+          readinessProbe:
+            httpGet:
+              path: /health
+              port: 5001
+            initialDelaySeconds: 5
+            periodSeconds: 10
