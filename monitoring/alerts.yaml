@@ -1,0 +1,20 @@
+groups:
+  - name: api-reliability-monitor
+    rules:
+      - alert: ServiceDown
+        expr: service_up == 0
+        for: 1m
+        labels:
+          severity: critical
+        annotations:
+          summary: "Service {{ $labels.name }} is DOWN"
+          description: "{{ $labels.name }} has been unreachable for more than 1 minute."
+
+      - alert: HighResponseTime
+        expr: service_response_ms > 1000
+        for: 2m
+        labels:
+          severity: warning
+        annotations:
+          summary: "High response time for {{ $labels.name }}"
+          description: "{{ $labels.name }} response time is {{ $value }}ms (threshold: 1000ms)."

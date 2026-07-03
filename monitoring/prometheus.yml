@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 30s
+  evaluation_interval: 30s
+
+rule_files:
+  - alerts.yaml
+
+scrape_configs:
+  - job_name: api-reliability-monitor
+    static_configs:
+      - targets:
+          - api-reliability-monitor:5001
+    metrics_path: /metrics
